@@ -1,0 +1,67 @@
+{% include 'header.html' %}
+ {% block content %}
+{% load static %}
+<style>
+    /* CSS rules for the form */
+    form {
+        width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f7f7f7;
+    }
+
+    /* Style form fields */
+    input[type="text"], input[type="email"], select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        background-color: #fff;
+    }
+
+    /* Customize the submit button */
+    input[type="submit"] {
+        background-color: #FE5D37;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-6">
+            {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <h1>{{ message }}</h1>
+        <p><a href="{% url 'home' %}">Return to Home</a></p>
+
+        {% endfor %}
+    </ul>
+{% endif %}
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+
+<form method="post" action="/submit/">
+    {% csrf_token %}
+     <h3>{{ form.name.errors }}</h3>
+
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+<!--{% for msg in messages%}-->
+<!--    <h2 style="color:red;">{{msg}}</h2>-->
+<!--    {% endfor %}-->
+
+{% include 'footer.html' %}
+{% endblock %}

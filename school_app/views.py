@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 
 from django.shortcuts import render, redirect
 from . form import FormEntryForm
+from .models import Course
+
 
 def show_form(request):
     form = FormEntryForm()
@@ -12,10 +14,15 @@ def show_form(request):
 
 def submit_form(request):
     if request.method == 'POST':
+
         form = FormEntryForm(request.POST)
         if form.is_valid():
+            # department_id = form.cleaned_data['department'].id
+            # courses = Course.objects.filter(department_id=department_id)
+            # form.fields['course'].queryset = courses
             form.save()
-            messages.success(request, "Order Placed........")
+            return render(request, 'confirm.html')
+            # messages.success(request, "Order Placed........")
             return redirect('form')
         print("created")
     else:

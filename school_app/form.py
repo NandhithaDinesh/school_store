@@ -1,14 +1,16 @@
 import re
 
 from django import forms
-from .models import FormEntry, Material
+from django.forms import inlineformset_factory
+
+from .models import FormEntry, Material, Department, Course
 
 
 class FormEntryForm(forms.ModelForm):
     class Meta:
         model = FormEntry
         fields = '__all__'
-
+    dob=forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     name = forms.CharField(max_length=100,required=True,error_messages={'required':'Req',})
     gender = forms.ChoiceField(
         choices=[('male', 'Male'), ('female', 'Female'), ('other', 'Other')],
@@ -40,3 +42,21 @@ class FormEntryForm(forms.ModelForm):
             raise forms.ValidationError('Enter a valid phone number.')
 
         return phone_number
+
+    # department = forms.ModelChoiceField(queryset=Department.objects.all(), label='Department')
+    # course = forms.ModelChoiceField(queryset=Course.objects.none(), label='Course')
+
+    # def __init__(self, *args, **kwargs):
+    #     super( FormEntryForm, self).__init__(*args, **kwargs)
+    #     self.fields['course'].queryset = Course.objects.none()
+    # def __init__(self, *args, **kwargs):
+    #     super(FormEntryForm, self).__init__(*args, **kwargs)
+    #     self.fields['course'].queryset = Course.objects.none()
+    #
+    #     # Check if 'department' is in the form data and update course choices
+    #     if 'department' in self.data:
+    #         try:
+    #             department_id = int(self.data.get('department'))
+    #             self.fields['course'].queryset = Course.objects.filter(department_id=department_id)
+    #         except (ValueError, TypeError):
+    #             pass  # Handle the case where 'department' is not a valid integer

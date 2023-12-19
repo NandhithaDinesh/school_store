@@ -1,0 +1,53 @@
+
+    {% load static %}
+<style>
+.row {
+    text-align: center;
+    margin-top: 280px;
+}
+.btn.btn-primary {
+    color: #FFFFFF;
+}
+.btn {
+    font-weight: 500;
+    transition: .5s;
+}
+a {
+    color: #FE5D37;
+    text-decoration: none;
+    }
+.py-3 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+.px-5 {
+    padding-right: 3rem !important;
+    padding-left: 3rem !important;
+}
+.mt-5 {
+    margin-top: 3rem !important;
+}
+.btn-primary {
+    color: #000;
+    background-color: #FE5D37;
+    border-color: #FE5D37;
+}
+.mar{
+    padding-bottom:20px;
+}
+</style>
+<div class="container">
+    <div class="row">
+
+        <div class="mar mb-4">
+           <h1 style="color:#FE5D37;">ORDER CONFIRMED</h1>
+        </div>
+            <div class="mt-3">
+                <a class="btn btn-primary py-3 px-5 mt-5" href="{% url 'home' %}">Click Here to Return to Homepage<i class="fa fa-arrow-right ms-2"></i></a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
